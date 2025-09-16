@@ -1,0 +1,15 @@
+# PlatformIO
+.pio/
+.piolibdeps/
+.clangd/
+
+# Editors
+.vscode/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Secrets
+**/include/config.h
+**/include/secrets.h
