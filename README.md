@@ -1,7 +1,6 @@
+# 情報学実験B 菊池クラス
 
-
-### 学生用
-## 使い方
+## 使い方[学生用]
 1. GitHubの緑の「Code」→「Download ZIP」
 2. 解凍して VS Code を開く
 3. 左のPlatformIOアイコン→「Open Project」→ このフォルダを選択
