@@ -1,0 +1,6 @@
+{
+  "name": "meisei_utils",
+  "version": "1.0.0",
+  "description": "Common helpers for Meisei experiments",
+  "build": { "srcDir": "src" }
+}
