@@ -13,7 +13,7 @@ http://unfoldingmaps.org/
 
 - Processingで地理情報の可視化をするためのライブラリ
 - 最新版のProcessingには対応していない
-    - Processing4に対応してくれいてる人がいたので使わせてもらう
+    - Processing4に対応してくれている人がいたので使わせてもらう
     - https://github.com/tillnagel/unfolding/pull/119
 
 ## 実行手順
