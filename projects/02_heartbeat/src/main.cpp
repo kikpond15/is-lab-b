@@ -28,7 +28,9 @@ void loop() {
   M5.Display.drawString(msg, 0, 40);
 
   //シリアルモニタに表示(VSCodeの場合"Teleplot"で確認可能)
-  Serial.printf("heatbeat:%d\n", heatbeat);
+  Serial.printf(">heatbeat:%d\n", heatbeat); //グラフ確認
+  // Serial.printf("heatbeat:%d\n", heatbeat); //数値確認のみ
+  
   delay(10);
   
 }
