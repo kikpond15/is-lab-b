@@ -16,7 +16,7 @@ void setup() {
   size(800, 600, P2D);
 
   map = new UnfoldingMap(this);
-  map.zoomAndPanTo(17, new Location(35.64505017198614, 139.40846229633914));
+  map.zoomAndPanTo(17, new Location(35.64435017198614, 139.40846229633914));
 }
 
 void draw() {
@@ -29,4 +29,8 @@ void draw() {
     fill(0, 200, 0, 100);
     ellipse(position.x, position.y, 20, 20);
   }
+}
+
+void keyPressed() {
+  save("map.png");
 }
