@@ -17,7 +17,6 @@ void setup() {
 
   map = new UnfoldingMap(this);
   map.zoomAndPanTo(17, new Location(35.64505017198614, 139.40846229633914));
-  MapUtils.createDefaultEventDispatcher(this, map);
 }
 
 void draw() {
