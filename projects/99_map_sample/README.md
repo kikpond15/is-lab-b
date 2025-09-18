@@ -18,7 +18,7 @@ http://unfoldingmaps.org/
 
 ## 実行手順
 
-1. 以下のURLからProcessing4で実行可能なUnfoldingをダウンロードする。
+1. 以下のURLからProcessing4で実行可能なUnfoldingをダウンロードする
     - http://services.informatik.hs-mannheim.de/~nagel/GDV/Unfolding_for_processing_0.9.92.zip
-2. ダウンロードしたZipを解凍して、 `Processing/libraries` に配置する。
+2. ダウンロードしたZipを解凍して、 `Processing/libraries` に配置する
 3. Processingで `MeiseiMapSample` を実行する
