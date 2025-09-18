@@ -30,7 +30,3 @@ void draw() {
     ellipse(position.x, position.y, 20, 20);
   }
 }
-
-void keyPressed() {
-  save("map.png");
-}
