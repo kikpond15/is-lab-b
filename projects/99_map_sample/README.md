@@ -33,7 +33,7 @@ Processingで使うための文字列に変換するツールを用意しまし�
 ```sh
 # iOS用
 python tools/csv2code.py --app ios tools/sample_locations/ios.csv
-# Google maps用
+# Google Maps用
 python tools/csv2code.py --app gmap tools/sample_locations/gmap.csv
 
 # 出力結果
