@@ -22,8 +22,8 @@ def google_maps_geo2geo_list(ios_loc: str):
 
 
 line_parse_func_map = {
-    'ios': ios_geo2geo_list,
-    'gmap': google_maps_geo2geo_list,
+    App.IOS.value: ios_geo2geo_list,
+    App.GOOGLE_MAPS.value: google_maps_geo2geo_list,
 }
 
 
