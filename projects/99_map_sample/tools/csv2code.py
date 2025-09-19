@@ -26,20 +26,19 @@ if __name__ == '__main__':
                         type=str,
                         default=App.IOS.value,
                         choices=[app.value for app in App])
-    
     parser.add_argument('file_name', type=str)
     args = parser.parse_args()
     
     with open(args.file_name) as f:
-        locations = []
+        location_strs = []
         lines = f.readlines()
         for line in lines:
             if len(line.strip()) == 0:
                 pass
             
             arg_str = ', '.join(geo_str2geo_list(line, args.app))
-            location = f'new Location({arg_str})'
-            locations.append(location)
+            location_str = f'new Location({arg_str})'
+            location_strs.append(location_str)
     
-    locaion_elements = ', '.join(locations)
-    print(f'Location[] locations = {{ {locaion_elements} }};')
+    locaion_elements_str = ', '.join(location_strs)
+    print(f'Location[] locations = {{ {locaion_elements_str} }};')
