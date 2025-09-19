@@ -16,7 +16,7 @@ str_maps = {
 def geo_str2geo_list(geo_str: str, app: str):
     str_map = str_maps[app]
     table = str.maketrans(str_map)
-    return [g.strip() for g in geo_str.translate(table).split(',')]
+    return map(lambda g: g.strip(), geo_str.translate(table).split(','))
 
 
 if __name__ == '__main__':
@@ -31,14 +31,8 @@ if __name__ == '__main__':
     
     with open(args.file_name) as f:
         location_strs = []
-        lines = f.readlines()
-        for line in lines:
-            if len(line.strip()) == 0:
-                pass
-            
-            arg_str = ', '.join(geo_str2geo_list(line, args.app))
-            location_str = f'new Location({arg_str})'
-            location_strs.append(location_str)
+        lines = filter(lambda l: len(l.strip()) > 0, f.readlines())
+        location_strs = map(lambda l: f'new Location({", ".join(geo_str2geo_list(l, args.app))})', lines)
     
     locaion_elements_str = ', '.join(location_strs)
     print(f'Location[] locations = {{ {locaion_elements_str} }};')
