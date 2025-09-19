@@ -7,24 +7,16 @@ class App(Enum):
     GOOGLE_MAPS = 'gmap'
 
 
-ios_str_map = { '北': '', '南': '-', '東': '', '西': '-', '°': '', }
-google_maps_str_map = { '(': '', ')': '', }
-
-
-def ios_geo2geo_list(ios_loc: str):
-    l, r = ios_loc.translate(str.maketrans(ios_str_map)).split(',')
-    return [l.strip(), r.strip()]
-
-
-def google_maps_geo2geo_list(ios_loc: str):
-    l, r = ios_loc.translate(str.maketrans(google_maps_str_map)).split(',')
-    return [l.strip(), r.strip()]
-
-
-line_parse_func_map = {
-    App.IOS.value: ios_geo2geo_list,
-    App.GOOGLE_MAPS.value: google_maps_geo2geo_list,
+str_maps = {
+    App.IOS.value: { '北': '', '南': '-', '東': '', '西': '-', '°': '', },
+    App.GOOGLE_MAPS.value: { '(': '', ')': '', }
 }
+
+
+def geo_str2geo_list(geo_str: str, app: str):
+    str_map = str_maps[app]
+    l, r = geo_str.translate(str.maketrans(str_map)).split(',')
+    return [l.strip(), r.strip()]
 
 
 if __name__ == '__main__':
@@ -34,6 +26,7 @@ if __name__ == '__main__':
                         type=str,
                         default=App.IOS.value,
                         choices=[app.value for app in App])
+    
     parser.add_argument('file_name', type=str)
     args = parser.parse_args()
     
@@ -44,7 +37,7 @@ if __name__ == '__main__':
             if len(line.strip()) == 0:
                 pass
             
-            arg_str = ', '.join(line_parse_func_map[args.app](line))
+            arg_str = ', '.join(geo_str2geo_list(line, args.app))
             location = f'new Location({arg_str})'
             locations.append(location)
     
