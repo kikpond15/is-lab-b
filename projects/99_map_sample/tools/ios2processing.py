@@ -4,7 +4,7 @@ import argparse
 loc_map = { '北': '', '南': '-', '東': '', '西': '-', '°': '', }
 
 
-def ios_location2float(ios_loc: str):
+def ios_geo2geo_list(ios_loc: str):
     l, r = ios_loc.translate(str.maketrans(loc_map)).split(',')
     return [l.strip(), r.strip()]
 
@@ -21,7 +21,7 @@ if __name__ == '__main__':
             if len(line.strip()) == 0:
                 pass
             
-            arg_str = ', '.join(ios_location2float(line))
+            arg_str = ', '.join(ios_geo2geo_list(line))
             location = f'new Location({arg_str})'
             locations.append(location)
     
