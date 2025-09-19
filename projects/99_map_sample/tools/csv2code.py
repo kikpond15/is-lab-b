@@ -15,8 +15,8 @@ str_maps = {
 
 def geo_str2geo_list(geo_str: str, app: str):
     str_map = str_maps[app]
-    l, r = geo_str.translate(str.maketrans(str_map)).split(',')
-    return [l.strip(), r.strip()]
+    table = str.maketrans(str_map)
+    return [g.strip() for g in geo_str.translate(table).split(',')]
 
 
 if __name__ == '__main__':
