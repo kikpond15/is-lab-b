@@ -1,16 +1,29 @@
 import argparse
 
 
-loc_map = { '北': '', '南': '-', '東': '', '西': '-', '°': '', }
+ios_str_map = { '北': '', '南': '-', '東': '', '西': '-', '°': '', }
+google_maps_str_map = { '(': '', ')': '', }
 
 
 def ios_geo2geo_list(ios_loc: str):
-    l, r = ios_loc.translate(str.maketrans(loc_map)).split(',')
+    l, r = ios_loc.translate(str.maketrans(ios_str_map)).split(',')
     return [l.strip(), r.strip()]
+
+
+def google_maps2geo_list(ios_loc: str):
+    l, r = ios_loc.translate(str.maketrans(google_maps_str_map)).split(',')
+    return [l.strip(), r.strip()]
+
+
+line_parse_func_map = {
+    'ios': ios_geo2geo_list,
+    'gmap': google_maps2geo_list,
+}
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument('-a', '--app', type=str, default='ios')
     parser.add_argument('file_name', type=str)
     args = parser.parse_args()
     
@@ -21,7 +34,7 @@ if __name__ == '__main__':
             if len(line.strip()) == 0:
                 pass
             
-            arg_str = ', '.join(ios_geo2geo_list(line))
+            arg_str = ', '.join(line_parse_func_map[args.app](line))
             location = f'new Location({arg_str})'
             locations.append(location)
     

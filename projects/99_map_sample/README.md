@@ -31,7 +31,11 @@ Processingで使うための文字列に変換するツールを用意しまし�
 以下のコマンドで標準出力されます。
 
 ```sh
-python tools/ios2processing.py tools/sample_locations/ios.csv
+# iOS用
+python tools/csv2code.py --app ios tools/sample_locations/ios.csv
+# Google maps用
+python tools/csv2code.py --app gmap tools/sample_locations/gmap.csv
+
 # 出力結果
 # Location[] locations = { new Location(35.64542, 139.40818), new Location(35.64578, 139.41030), new Location(35.64410, 139.40918), new Location(35.64340, 139.40807), new Location(35.64419, 139.40647), new Location(35.64457, 139.40730) };
 ```
