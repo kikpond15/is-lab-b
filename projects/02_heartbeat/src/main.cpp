@@ -12,11 +12,6 @@ void setup() {
   M5.Display.setTextColor(TFT_WHITE, TFT_BLACK);
   M5.Display.clear();
 
-#ifdef TARGET_M5BASIC
-  M5.Display.println("Board: M5Stack Basic");
-#elif defined(TARGET_M5CORE2)
-  M5.Display.println("Board: M5Stack Core2");
-#endif
 }
 
 void loop() {

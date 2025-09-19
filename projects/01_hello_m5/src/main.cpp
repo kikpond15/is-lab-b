@@ -9,11 +9,6 @@ void setup() {
   M5.Display.clear();
   M5.Display.println("Hello, M5!");
 
-#ifdef TARGET_M5BASIC
-  M5.Display.println("Board: M5Stack Basic");
-#elif defined(TARGET_M5CORE2)
-  M5.Display.println("Board: M5Stack Core2");
-#endif
 }
 
 void loop() {

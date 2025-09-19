@@ -13,3 +13,6 @@ Thumbs.db
 # Secrets
 **/include/config.h
 **/include/secrets.h
+
+#Slide
+.pptx
