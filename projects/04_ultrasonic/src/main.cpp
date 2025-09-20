@@ -15,22 +15,15 @@ void setup() {
   M5.Display.setTextColor(TFT_WHITE, TFT_BLACK);
   M5.Display.clear();
 
-#ifdef TARGET_M5BASIC
-  M5.Display.println("Board: M5Stack Basic");
-#elif defined(TARGET_M5CORE2)
-  M5.Display.println("Board: M5Stack Core2");
-#endif
-
   hcsr04.begin(trig_pin, echo_pin);
 }
 
 void loop() {
   M5.update();
   float dist = hcsr04.distance();
-  
-  char message[20];
-  sprintf(message, "distance: %6.2fcm", dist);
-  M5.Display.drawString(message, 0, 40);
+
+  M5.Display.setCursor(0, 0);
+  M5.Display.printf("distance: %6.2fcm", dist);
   Serial.println(dist);
   delay(10);
 }
