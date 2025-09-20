@@ -22,3 +22,20 @@ http://unfoldingmaps.org/
     - http://services.informatik.hs-mannheim.de/~nagel/GDV/Unfolding_for_processing_0.9.92.zip
 2. ダウンロードしたZipを解凍して、 `Processing/libraries` に配置する
 3. Processingで `MeiseiMapSample` を実行する
+
+## 緯度経度情報をLocation配列を定義する文字列に変換するツール
+
+スマートフォンのマップアプリでコピーアンドペーストした緯度経度情報を、
+Processingで使うための文字列に変換するツールを用意しました。
+
+以下のコマンドで標準出力されます。
+
+```sh
+# iOS用
+python tools/csv2code.py --app ios tools/sample_locations/ios.csv
+# Google Maps用
+python tools/csv2code.py --app gmap tools/sample_locations/gmap.csv
+
+# 出力結果
+# Location[] locations = { new Location(35.64542, 139.40818), new Location(35.64578, 139.41030), new Location(35.64410, 139.40918), new Location(35.64340, 139.40807), new Location(35.64419, 139.40647), new Location(35.64457, 139.40730) };
+```
