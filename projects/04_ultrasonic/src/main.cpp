@@ -29,7 +29,7 @@ void loop() {
   float dist = hcsr04.distance();
   
   char message[20];
-  sprintf(message, "distance: %.2fcm", dist);
+  sprintf(message, "distance: %6.2fcm", dist);
   M5.Display.drawString(message, 0, 40);
   Serial.println(dist);
   delay(10);
