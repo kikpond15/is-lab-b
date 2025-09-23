@@ -247,11 +247,31 @@ Board: **M5Stack Core ESP32**
 Framework: **Arduino**
 Location☑️から保存先をデフォルトか任意のディレクトリに変更できる。
 デスクトップに「**meisei-exb2025**」フォルダを作成し、そこに保存しましょう。
-<img src="img/ss_img 2025-09-23 20.12.59.png" width=550> 設定できたら「Finish」をクリック
+<img src="img/ss_img 2025-09-23 20.48.52.png" width=700>
+設定できたら「Finish」をクリック
 
 
 ---
+#### プロジェクト作成の画面
 
+<img src="img/ss_img 2025-09-23 20.55.34.png" width=1100>
+
+---
+#### ディレクトリ構成
+m5-test/
+├── platformio.ini（**libraryなどの設定ファイル**）
+├── src/
+│   └── main.cpp（**メインとなるプログラム**）
+├── include/
+│   └── README
+├── lib/
+│   └── README
+├── test/
+│   └── README
+├── .vscode/
+│   └── （VSCode設定ファイル群）
+├── .pio/
+│   └── （PlatformIOビルド成果物）
 
 ---
 
