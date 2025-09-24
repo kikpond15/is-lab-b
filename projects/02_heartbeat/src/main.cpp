@@ -16,15 +16,15 @@ void setup() {
 
 void loop() {
   M5.update();
-  int heatbeat = analogRead(36);//GPIO36(ADC1_CH0)を使用
+  int heartbeat = analogRead(36);//GPIO36(ADC1_CH0)を使用
 
   //画面に表示
-  String msg = "heatbeat: " + String(heatbeat);
+  String msg = "heartbeat: " + String(heartbeat);
   M5.Display.drawString(msg, 0, 40);
 
   //シリアルモニタに表示(VSCodeの場合"Teleplot"で確認可能)
-  Serial.printf(">heatbeat:%d\n", heatbeat); //グラフ確認
-  // Serial.printf("heatbeat:%d\n", heatbeat); //数値確認のみ
+  Serial.printf(">heartbeat:%d\n", heartbeat); //グラフ確認
+  // Serial.printf("heartbeat:%d\n", heartbeat); //数値確認のみ
   
   delay(10);
   
