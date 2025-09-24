@@ -465,11 +465,64 @@ M5Core2の背面には、GPIO(General-Purpose Input/Output)があり、そこか
 **projectsフォルダ**の中に、サンプルコードが複数あります。
 今回使うのは、
 
-**02_heartbeat**
 **04_ultrasonic**
+**02_heartbeat**
 **05_color_sensor**
 
-VSCを新規で立ち上げて(Ctrl + Shift + n)、02_heartbeatフォルダを開いてみよう。
+VSCを新規で立ち上げて(Ctrl + Shift + n)、04_ultrasonicフォルダを開いてみよう。
+
+---
+<!-- _class: lead -->
+### 実世界センシング＆ビジュアライゼーション
+# 超音波距離センサの使い方
+
+---
+## 距離センサの配線
+<img src="img/ss_img 2025-09-25 0.00.09.png" width=900>
+
+---
+配線できたら、04_ultrasonicのコードをM5にアップロードしてみよう。
+(HCSR04クラスに詳しい処理が入っている)
+
+```c++
+//main.cpp
+#include <Arduino.h>
+#include <M5Unified.h>
+#include "HCSR04.h"
+
+const int trig_pin = G25;
+const int echo_pin = G35;
+HCSR04 hcsr04;
+
+void setup() {
+  m5::M5Unified::config_t cfg = M5.config();
+  M5.begin(cfg);
+  Serial.begin(115200);
+
+  M5.Display.setTextSize(2);
+  M5.Display.setTextColor(TFT_WHITE, TFT_BLACK);
+  M5.Display.clear();
+
+  hcsr04.begin(trig_pin, echo_pin);
+}
+
+void loop() {
+  M5.update();
+  float dist = hcsr04.distance();
+
+  M5.Display.setCursor(0, 0);
+  M5.Display.printf("distance: %6.2fcm", dist);
+  Serial.println(dist);
+  delay(10);
+}
+
+```
+---
+<br><br>
+
+センサの正面にある物との距離をcmで画面に表示する。
+曲面などは距離が計りにくい。何メートルまで計測できるか試してみよう。
+
 
 ---
 <!-- _class: lead -->
@@ -477,7 +530,7 @@ VSCを新規で立ち上げて(Ctrl + Shift + n)、02_heartbeatフォルダを�
 # 心拍センサの使い方
 
 ---
-## 心拍センサ
+## 心拍センサの配線
 心拍センサは、ハートマークを上にした時に、左からGND、3.3V, シグナルピン(GPIO36)の順に並んでいる。M5の背面に配線してみよう。
 <br>
 
@@ -533,20 +586,6 @@ M5から心拍のデータがシリアル通信経由でVSCに送られ、Telepl
 
 <img src="img/ss_img 2025-09-24 23.16.39.png" width=1100>
 
-
-
----
-<!-- _class: lead -->
-### 実世界センシング＆ビジュアライゼーション
-# 超音波距離センサの使い方
-
----
-
-
----
-
-
----
 
 
 ---
