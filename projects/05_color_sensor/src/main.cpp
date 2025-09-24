@@ -2,8 +2,8 @@
 // https://note.com/kumin/n/n69bc23222c46
 
 /* 接続例（M5StackではI2Cは内部配線済み）
-   SCL → GPIO22 (内部)
-   SDA → GPIO21 (内部)
+   SCL → GPIO33
+   SDA → GPIO32
    VDD → 3.3V
    GND → GND
 */
