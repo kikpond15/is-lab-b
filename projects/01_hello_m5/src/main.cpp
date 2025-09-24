@@ -13,18 +13,21 @@ void setup() {
 
 void loop() {
   M5.update();                  // ボタン/タッチ等の状態更新
-
-  // Basic: A/B/C ボタン、Core2: タッチ
-  if (M5.BtnA.wasPressed())     M5.Display.println("BtnA pressed");
-  if (M5.BtnB.wasPressed())     M5.Display.println("BtnB pressed");
-  if (M5.BtnC.wasPressed())     M5.Display.println("BtnC pressed");
-
+  
+  String msg1 = "";
   // Core2のタッチ例（Basicでも安全に呼べる）
   auto t = M5.Touch.getDetail();
   if (t.isPressed()) {
-    M5.Display.printf("Touch: (%d, %d)\n", t.x, t.y);
+    msg1 = "Touch: " + String(t.x) + "," + String(t.y);
   }
+  M5.Display.drawString(msg1, 0, 40);  //画面に表示
 
+  String msg2 = "";
+  // Basic: A/B/C ボタン、Core2: タッチ
+  if (M5.BtnA.wasPressed())     msg2 = "BtnA pressed";
+  if (M5.BtnB.wasPressed())     msg2 = "BtnB pressed";
+  if (M5.BtnC.wasPressed())     msg2 = "BtnC pressed";
+  M5.Display.drawString(msg2, 0, 60);
   delay(10);
 }
 
