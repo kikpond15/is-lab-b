@@ -297,8 +297,7 @@ https://github.com/kikpond15/is-lab-b/blob/main/projects/01_hello_m5/src/main.cp
 ## サンプルコードを書き込んでみよう
 
 ```c++
-//https://github.com/kikpond15/is-lab-b/blob/main/projects/01_hello_m5/src/main.cpp
-
+// https://github.com/kikpond15/is-lab-b/blob/main/projects/01_hello_m5/src/main.cpp
 #include <M5Unified.h>
 
 void setup() {
@@ -312,16 +311,20 @@ void setup() {
 
 void loop() {
   M5.update();                  // ボタン/タッチ等の状態更新
-  // Basic: A/B/C ボタン、Core2: タッチ
-  if (M5.BtnA.wasPressed())     M5.Display.println("BtnA pressed");
-  if (M5.BtnB.wasPressed())     M5.Display.println("BtnB pressed");
-  if (M5.BtnC.wasPressed())     M5.Display.println("BtnC pressed");
-
+  String msg1 = "";
   // Core2のタッチ例（Basicでも安全に呼べる）
   auto t = M5.Touch.getDetail();
   if (t.isPressed()) {
-    M5.Display.printf("Touch: (%d, %d)\n", t.x, t.y);
+    msg1 = "Touch: " + String(t.x) + "," + String(t.y);
   }
+  M5.Display.drawString(msg1, 0, 40);  //画面に表示
+
+  String msg2 = "";
+  // Basic: A/B/C ボタン、Core2: タッチ
+  if (M5.BtnA.wasPressed())     msg2 = "BtnA pressed";
+  if (M5.BtnB.wasPressed())     msg2 = "BtnB pressed";
+  if (M5.BtnC.wasPressed())     msg2 = "BtnC pressed";
+  M5.Display.drawString(msg2, 0, 60);
   delay(10);
 }
 ```
@@ -367,7 +370,6 @@ build_flags =
 コードの作成＆リアブラリの設定が完了したら、**コンパイル**してみよう。
 コンパイル：作成したコードなどをコンピュータが理解でできる機械語やバイナリに変換しエラーがないかチェックする処理。
 
-
 **コンパイル：Ctrl + option + b (VSC下部にある☑️マークからでもOK)**
 ターミナル画面に **[SUCCESS]** が表示されればOK
 
@@ -380,12 +382,22 @@ PCとM5をUSBケーブルで接続し、アップロードしましょう。
 ターミナル画面に **[SUCCESS]** が表示されればOK
 
 
-## 
+
 
 ---
-## 
+## コンパイル＆M5に書き込みしてみよう
+ディスプレイ下部の⭕️ボタンや、ディスプレを触ると、触っている箇所の座標が表示される。
+<img src="img/IMG_0542.JPG" width=700>
+
+
 ---
-## 
+<!-- _class: lead -->
+
+これでPIOの環境構築は完了です。
+
+上記の手順でM5のプログラム作成から、アップロード、実機動作までを行いました。
+
+忘れないように、ノートにメモをとっておきましょう。
 
 ---
 ## 
