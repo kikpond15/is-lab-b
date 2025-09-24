@@ -20,14 +20,14 @@
 // 積分時間614ms・ゲイン1xで初期化（高精度測定）
 Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_614MS, TCS34725_GAIN_1X);
 
+
 void setup(void) {
-  Serial.begin(9600);  // シリアル通信開始（デバッグ用）
-  M5.begin();          // M5Stack初期化
-  // LCDの設定
-  M5.Lcd.setRotation(1);        // 画面を横向きに回転
-  M5.Lcd.fillScreen(BLACK);     // 画面を黒でクリア
-  M5.Lcd.setTextSize(3);        // テキストサイズを大きく
-  M5.Lcd.setTextColor(WHITE);   // テキスト色を白に
+  Serial.begin(9600);
+  M5.begin();
+  M5.Lcd.setRotation(1);
+  M5.Lcd.fillScreen(BLACK);
+  M5.Lcd.setTextSize(3);
+  M5.Lcd.setTextColor(WHITE);
   // カラーセンサ初期化
   if (tcs.begin()) {               // センサが見つかった場合
     M5.Lcd.setCursor(10, 10);
@@ -54,14 +54,8 @@ void loop(void) {
     R = G = B = 0; // クリア値0のときは0
   }
 
-  M5.Lcd.fillRect(0, 50, 320, 200, BLACK);  // 表示更新領域をクリア（黒塗り）
-  // RGB値を画面に表示
-  M5.Lcd.setCursor(10, 60);
-  M5.Lcd.printf("R: %d", R);
-  M5.Lcd.setCursor(10, 100);
-  M5.Lcd.printf("G: %d", G);
-  M5.Lcd.setCursor(10, 140);
-  M5.Lcd.printf("B: %d", B);
+  uint16_t COLOR= M5.Lcd.color565(R,G,B);
 
+  M5.Lcd.fillRect(0, 50, 320, 200, COLOR);  // 表示更新領域をクリア（黒塗り）
   delay(500);
 }
