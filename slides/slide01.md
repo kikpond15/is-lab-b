@@ -1,18 +1,30 @@
 ---
 marp: true
 theme: gaia
+size: 16:9
 paginate: true
 style: |
   /* 全体を縮小 */
-  section { font-size: 2.3em; }
-
+  section { font-size: 2.0em; }
+  section {padding-bottom:100px;}
+  section {padding-top: 20px;}
+  
   /* 見出しが大きすぎるなら個別に下げる */
-  section h1 { font-size: 2.7em; }
-  section h2 { font-size: 1.35em; }
+  section h1 { font-size: 2em; }
+  section h2 { font-size: 1.5em; }
   section h3 { font-size: 1.1em; }
 
   /* 箇条書きの行間が詰まる場合の微調整（任意） */
   section ul, section ol { line-height: 1.2; }
+
+  pre, code { 
+  font-size: 0.7em;
+  font-family: 'Menlo', 'Monaco', 'Consolas', 'Courier', monospace; 
+  }
+  pre { overflow-x: auto; }
+  .red { color: red; }
+  .blue { color: blue; }
+
 ---
 <!-- _class: lead -->
 2025年後期
@@ -196,7 +208,7 @@ Future Ideations Camp Vol.4「生態系をデータとしてとらえる／表�
 - 実験環境や実験機材など細かく記載する
 - 実験の様子など正確に撮影し、レポートに図として取り入れる
 - 制作したビジュアライゼーション作品についてレポートでまとめる
-(コンセプト、実装-方法、実験環境、ビジュアライズの方法など)
+(コンセプト、実装方法、実験環境、ビジュアライズの方法など)
 
 
 - レポート作成時に、実験内容を思い出せるように、
@@ -274,19 +286,98 @@ m5-test/
 │   └── （PlatformIOビルド成果物）
 
 ---
+## サンプルコードを書き込んでみよう
+次ページにコードをsrc/main.cppに書き込んでみよう。
+こちらのGithubにも同じコードがあります。
+
+https://github.com/kikpond15/is-lab-b/blob/main/projects/01_hello_m5/src/main.cpp
 
 
 ---
+## サンプルコードを書き込んでみよう
 
+```c++
+//https://github.com/kikpond15/is-lab-b/blob/main/projects/01_hello_m5/src/main.cpp
+
+#include <M5Unified.h>
+
+void setup() {
+  auto cfg = M5.config();      // M5Unifiedが機種差を吸収
+  M5.begin(cfg);
+  M5.Display.setRotation(1);   // 横向き
+  M5.Display.setTextSize(2);
+  M5.Display.clear();
+  M5.Display.println("Hello, M5!");
+}
+
+void loop() {
+  M5.update();                  // ボタン/タッチ等の状態更新
+  // Basic: A/B/C ボタン、Core2: タッチ
+  if (M5.BtnA.wasPressed())     M5.Display.println("BtnA pressed");
+  if (M5.BtnB.wasPressed())     M5.Display.println("BtnB pressed");
+  if (M5.BtnC.wasPressed())     M5.Display.println("BtnC pressed");
+
+  // Core2のタッチ例（Basicでも安全に呼べる）
+  auto t = M5.Touch.getDetail();
+  if (t.isPressed()) {
+    M5.Display.printf("Touch: (%d, %d)\n", t.x, t.y);
+  }
+  delay(10);
+}
+```
 
 ---
+## サンプルコードを書き込んでみよう
+まだlibraryをインストールしていないので、一行目の```#include <M5Unified.h>```で
+エラーが出るかと思います。
 
+libraryを追加するには2つの方法があります。1つ目は下図のようにPIO HOMEから直接インストールする方法。
+
+<img src="img/ss_img 2025-09-24 9.03.25.png" width=600>
+<img src="img/ss_img 2025-09-24 9.06.54.png" width=500>
 
 ---
+もう1つは、platformio.iniに追加したいライブラリを書き込む方法。
+Platformio.iniは　ライブラリやその他マイコンのボード情報など、設定に必要な情報を管理する。
 
+```ini
+[platformio]
+default_envs = m5core2
+[env]                       ; 共通設定
+platform = espressif32@6.5.0
+framework = arduino
+monitor_speed = 115200
+; 共有インクルード/ライブラリ（相対パス）
+lib_extra_dirs = ../../shared/lib
+build_flags    = -I ../../shared/include
+; 外部依存（バージョン固定推奨）
+lib_deps =
+  m5stack/M5Unified@^0.1.15
+  m5stack/M5GFX@^0.1.15
+[env:m5core2]
+board = m5stack-core2
+build_flags =
+  ${env.build_flags}
+  -D M5UNIFIED
+  -D TARGET_M5CORE2
+```
 
 ---
+## コンパイル＆M5に書き込みしてみよう
+コードの作成＆リアブラリの設定が完了したら、**コンパイル**してみよう。
+コンパイル：作成したコードなどをコンピュータが理解でできる機械語やバイナリに変換しエラーがないかチェックする処理。
 
+
+**コンパイル：Ctrl + option + b (VSC下部にある☑️マークからでもOK)**
+ターミナル画面に **[SUCCESS]** が表示されればOK
+
+---
+## コンパイル＆M5に書き込みしてみよう
+コンパイルが成功したら、M5にアップロードしてみよう。
+PCとM5をUSBケーブルで接続し、アップロードしましょう。
+
+**アップロード：Ctrl + option + u（VSC下部にある→マークからでもOK）**
+ターミナル画面に **[SUCCESS]** が表示されればOK
 
 
 ## 
