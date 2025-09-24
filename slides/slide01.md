@@ -425,6 +425,15 @@ PCとM5をUSBケーブルで接続し、アップロードしましょう。
 # センサを使ってみよう
 
 
+---
+## M5でセンサを使うには
+M5Core2の背面には、GPIO(General-Purpose Input/Output)があり、そこから電気を流したり、センサの値を読み取ったりすることができる。
+各センサは、GPIOのどこに接続すれば良いかが決まっている。
+間違えるとショートしたり、ICが壊れて煙が出るので注意しよう！
+<br>
+
+<img src="img/IMG_0543.JPG" width=500>
+
 
 ---
 ## 使用するセンサ紹介
@@ -445,8 +454,91 @@ PCとM5をUSBケーブルで接続し、アップロードしましょう。
 <img src="img/71FGCSOLIDL._SX522_.jpg" width=400>
 
 ---
-## GiHubからサンプルコードをダウンロードしよう
+## GitHubからサンプルコードをダウンロードしよう
 
+ここからダウンロードする→https://github.com/kikpond15/is-lab-b
+リンク先のリポジトリをZipでダウンロードし、デスクトップの**meisei-exb2025**に解凍する。
+
+<img src="img/ss_img 2025-09-24 21.18.59.png" width=900>
+
+---
+**projectsフォルダ**の中に、サンプルコードが複数あります。
+今回使うのは、
+
+**02_heartbeat**
+**04_ultrasonic**
+**05_color_sensor**
+
+VSCを新規で立ち上げて(Ctrl + Shift + n)、02_heartbeatフォルダを開いてみよう。
+
+---
+<!-- _class: lead -->
+### 実世界センシング＆ビジュアライゼーション
+# 心拍センサの使い方
+
+---
+## 心拍センサ
+心拍センサは、ハートマークを上にした時に、左からGND、3.3V, シグナルピン(GPIO36)の順に並んでいる。M5の背面に配線してみよう。
+<br>
+
+<img src="img/heartbeat_circuit.png" width=800>
+
+---
+配線できたら、02_heartbeatのコードをM5にアップロードしてみよう。
+```c++
+//https://www.switch-science.com/products/1135
+#include <M5Unified.h>
+
+void setup() {
+  auto cfg = M5.config();      // M5Unifiedが機種差を吸収
+  M5.begin(cfg);
+  Serial.begin(115200); //シリアルモニタ用
+
+  M5.Display.setTextSize(2);
+  M5.Display.setTextColor(TFT_WHITE, TFT_BLACK);
+  M5.Display.clear();
+}
+
+void loop() {
+  M5.update();
+  int heartbeat = analogRead(36);//GPIO36(ADC1_CH0)を使用
+  //画面に表示
+  String msg = "heartbeat: " + String(heartbeat);
+  M5.Display.drawString(msg, 0, 40);
+
+  //シリアルモニタに表示(VSCodeの場合"Teleplot"で確認可能)
+  Serial.printf(">heartbeat:%d\n", heartbeat); //グラフ確認
+  // Serial.printf("heartbeat:%d\n", heartbeat); //数値確認のみ
+  delay(10); 
+}
+
+```
+M5の画面に心拍センサで計測した数値が出てきます。ハートマークの面に指先をおいてみましょう。
+
+---
+## シリアルモニタを使ってグラフにしてみよう。
+数値だけだと分かりにくいので、グラフにプロットしてみよう。
+VSCの**Extensions**から**Teleplot**を追加してみよう。
+<img src="img/ss_img 2025-09-24 23.11.06.png" width=1000>
+
+---
+VSC下部にTeleplotが追加されるので、クリックして開く
+
+![alt text](<img/ss_img 2025-09-24 23.12.57.png>)
+
+---
+SerialのプルダウンメニューからM5のポートを選択し、**Open**する。
+M5から心拍のデータがシリアル通信経由でVSCに送られ、Teleplotでグラフとしてリアルタイムに確認できる。
+<br>
+
+<img src="img/ss_img 2025-09-24 23.16.39.png" width=1100>
+
+
+
+---
+<!-- _class: lead -->
+### 実世界センシング＆ビジュアライゼーション
+# 超音波距離センサの使い方
 
 ---
 
@@ -458,13 +550,9 @@ PCとM5をUSBケーブルで接続し、アップロードしましょう。
 
 
 ---
-
-
----
-
-
----
-
+<!-- _class: lead -->
+### 実世界センシング＆ビジュアライゼーション
+# カラーセンサの使い方
 
 ---
 
@@ -472,3 +560,4 @@ PCとM5をUSBケーブルで接続し、アップロードしましょう。
 ---
 
 
+---
