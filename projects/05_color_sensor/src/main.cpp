@@ -54,8 +54,16 @@ void loop(void) {
     R = G = B = 0; // クリア値0のときは0
   }
 
-  uint16_t COLOR= M5.Lcd.color565(R,G,B);
+  // 表示更新
+  M5.Lcd.fillRect(0, 50, 320, 200, BLACK);
+  M5.Lcd.setCursor(10, 60);
+  M5.Lcd.printf("R: %d", R);
+  M5.Lcd.setCursor(10, 100);
+  M5.Lcd.printf("G: %d", G);
+  M5.Lcd.setCursor(10, 140);
+  M5.Lcd.printf("B: %d", B);
 
-  M5.Lcd.fillRect(0, 50, 320, 200, COLOR);  // 表示更新領域をクリア（黒塗り）
+  //uint16_t COLOR= M5.Lcd.color565(R,G,B);
+  //M5.Lcd.fillRect(0, 50, 320, 200, COLOR);
   delay(500);
 }
