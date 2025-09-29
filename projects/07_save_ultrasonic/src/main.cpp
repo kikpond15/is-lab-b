@@ -22,7 +22,7 @@ void setup() {
 
   SD.begin(4, SPI, 40000000);  
   sdcard = SD.open("/m5.csv", FILE_WRITE);
-  sdcard.println("time, diastance");
+  sdcard.println("time,distance");
   sdcard.flush();
 }
 
