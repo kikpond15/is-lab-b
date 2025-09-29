@@ -8,7 +8,6 @@ void setup() {
   M5.Display.setTextSize(2);
   M5.Display.clear();
   M5.Display.println("Hello, M5!");
-
 }
 
 void loop() {
