@@ -21,7 +21,7 @@ void draw(){
     TableRow row = table.getRow(i);
     int time = row.getInt("time"); // 列名指定
     int distance = row.getInt("distance");  // 列名指定
-    float x = map(time, 6831, 21160, 0, width); // timeをx座標にマッピング
+    float x = map(time, 27827, 46655, 0, width); // timeをx座標にマッピング
     float y = map(distance, 0, 400, height, 0); // distanceをy座標にマッピング（距離が大きいほど上に）
     fill(255);
     noStroke();
