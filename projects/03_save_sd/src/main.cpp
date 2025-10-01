@@ -17,7 +17,7 @@ void setup() {
 
   SD.begin(4, SPI, 40000000); // SDカード初期化(CSピン4, SPIクロック40MHz)
   sdcard = SD.open("/m5.csv", FILE_WRITE); // 追記モードでオープン
-  sdcard.println("time, button"); // ヘッダー行書き込み
+  sdcard.println("time,button"); // ヘッダー行書き込み
   sdcard.flush();
 }
 

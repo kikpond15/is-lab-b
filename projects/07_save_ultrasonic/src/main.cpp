@@ -21,7 +21,7 @@ void setup() {
   hcsr04.begin(trig_pin, echo_pin);
 
   SD.begin(4, SPI, 40000000);  
-  sdcard = SD.open("/m5.csv", FILE_WRITE);
+  sdcard = SD.open("/m5_distance.csv", FILE_WRITE);
   sdcard.println("time,distance");
   sdcard.flush();
 }
