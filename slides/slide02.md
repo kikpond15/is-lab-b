@@ -64,6 +64,79 @@ PG = プログラム
 https://github.com/kikpond15/is-lab-b
 
 ---
+## 実験スケジュール
+- 1週目：導入＆実験準備
+    - 実験概要説明＆環境構築
+    - M5のサンプルコード動作確認
+    - センサーのサンプルコードテスト
+- 2週目：データ保存＆ビジュアライゼーション手法
+    - SDへのデータ保存＆センサデータのSD保存
+    - ビジュアライゼーション手法＆サンプル
+
+- 3週目：ビジュアライゼーションのアイディア出し
+    - アイディア出し
+    - アイディアチェック＆修正
+
+---
+- 4週目：センシングデバイスのプロトタイプ実装
+    - M5センサの実装＆データ保存の確認
+    - 可視化プロトタイプ実装＆ダミーデータテスト
+- 5週目：実世界フィールドワーク 
+    - 学内でデータ収集実験
+    - データの確認＆追加実験
+- 6週目：ビジュアライゼーション制作
+    - ビジュアライゼーション制作1
+    - ビジュアライゼーション制作2
+
+- 休み期間：(学祭 or 冬休み)
+
+- 7週目：予備日(追実験＆レポート作成)
+    - レポート作成
+
+---
+## 実験を行う前の注意点
+- 実験機材は最新の注意を払って扱うこと
+- 電子機器、回路を扱うので、水分が付いた手で扱わないこと(感電します)
+- PCの上でマイコン、電子機器を扱わないこと(ショートします)
+
+<br>
+
+- ChatGPTや生成AIの使用について
+    - コードの実装には使っていい
+    - レポートには使っちゃダメ
+    - 生成AIはコードが脱線するから1から作り直しになることもある
+    - 生成AIより教員とSA/TAを頼って
+
+
+---
+## レポートについて
+- 各回の実験内容をレポートにまとめる
+- 実験環境や実験機材など細かく記載する
+- 実験の様子など正確に撮影し、レポートに図として取り入れる
+- 制作したビジュアライゼーション作品についてレポートでまとめる
+(コンセプト、実装方法、実験環境、ビジュアライズの方法など)
+
+<br>
+
+- レポート作成時に、実験内容を思い出せるように、ノートを用意し各回メモを取ること。
+
+---
+## 本日の課題
+
+本日の実験内容を実験ノートにまとめ、最終レポートに備え、小レポートを作成する。
+
+小レポート内容：下記項目について写真や図などを入れ、まとめる
+
+- マイコンでデータを保存する方法について
+- processingで保存したデータを扱う方法について
+- 地図上にデータをマップする方法について
+(実際に実験した様子や、制作したプログラムなどもあれば)
+
+<br>
+小レポートの提出はしなくて良いが、最終レポートに備え作成することを推奨する。
+
+
+---
 <!-- _class: lead -->
 <a id="外部ストレージへのデータ保存"></a> 
 
@@ -736,3 +809,70 @@ void draw() {
 **MeiseiMapSample**を使って収集した色を地図上にマップしてみよう！
 
 ---
+10_save_color_sensor/main.cpp
+```c++
+#include <Wire.h>
+#include <Adafruit_TCS34725.h>
+#include <M5Unified.h>
+#include <SD.h>
+Adafruit_TCS34725 tcs = Adafruit_TCS34725(TCS34725_INTEGRATIONTIME_614MS, TCS34725_GAIN_1X);
+File sdcard;
+
+void saveColor(uint32_t r, uint32_t g, uint32_t b);
+
+void setup(void){
+  Serial.begin(9600);
+  M5.begin();
+  M5.Lcd.setRotation(1);
+  M5.Lcd.setTextSize(2);
+  M5.Lcd.fillScreen(WHITE);
+  M5.Lcd.setTextColor(BLACK);
+  tcs.begin();
+
+  SD.begin(4, SPI, 40000000);                    // SDカード初期化(CSピン4, SPIクロック40MHz)
+  sdcard = SD.open("/m5_color.csv", FILE_WRITE); // 追記モードでオープン
+  sdcard.println("r,g,b");　// ヘッダー行書き込み
+  sdcard.flush();
+}
+
+void loop(void){
+  M5.update();
+  uint16_t r, g, b, c, colorTemp, lux;
+  tcs.getRawData(&r, &g, &b, &c);
+  colorTemp = tcs.calculateColorTemperature_dn40(r, g, b, c);
+  lux = tcs.calculateLux(r, g, b);
+
+  uint8_t R, G, B; // 明るさ（クリア値c）で正規化して0-255のRGB値に変換
+  if (c > 0){
+    R = (uint32_t)r * 255 / c; // 赤成分を正規化
+    G = (uint32_t)g * 255 / c; // 緑成分を正規化
+    B = (uint32_t)b * 255 / c; // 青成分を正規化
+  } else {
+    R = G = B = 0;
+  }
+
+  uint16_t COLOR = M5.Lcd.color565(R, G, B);
+  M5.Lcd.fillRect(0, 30, 320, 300, COLOR);
+
+  M5.Display.drawString("R:" + String(R) + "  ", 10, 60);
+  M5.Display.drawString("G:" + String(G) + "  ", 10, 90);
+  M5.Display.drawString("B:" + String(B) + "  ", 10, 120);
+
+  if (M5.BtnA.wasPressed()){
+    saveColor(R, G, B); // ボタンAが押されたら保存
+    M5.Display.drawString("Saved Color", 10, 10);
+    delay(2000);
+    M5.Lcd.fillRect(0, 0, 320, 30, WHITE);
+  }
+  //delay(50);
+}
+
+void saveColor(uint32_t r, uint32_t g, uint32_t b){
+  // CSV形式で「時刻,ボタン」書き込み(時刻は起動からのミリ秒)
+  String line = String(r) + "," + String(g) + "," + String(b);
+  if (sdcard){
+    sdcard.println(line); // 書き込み
+    sdcard.flush();       // SDカードに保存
+  }
+}
+```
