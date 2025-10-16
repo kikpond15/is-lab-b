@@ -42,7 +42,6 @@ void loop() {
       M5.Display.drawString("Logging Start", 0, 30);
     }
   }
-
   // ログの状態がONならタッチ位置をSDカードに保存
   if (loggingState == true) saveSD(dist);
   delay(10);
