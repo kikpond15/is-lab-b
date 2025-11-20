@@ -221,6 +221,7 @@ Future Ideations Camp Vol.4「生態系をデータとしてとらえる／表�
     - レポートには使っちゃダメ
     - 生成AIはコードが脱線するから1から作り直しになることもある
     - 生成AIより教員とSA/TAを頼って
+    - [生成AIとの付き合い方 / Generative AI and us](https://speakerdeck.com/kaityo256/generative-ai-and-us)
 
 
 ---
