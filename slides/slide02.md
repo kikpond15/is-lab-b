@@ -7,7 +7,7 @@ style: |
   /* 全体を縮小*/
   /* エクスポートするときfont-sizeは、1.7emが良い */
 
-  section { font-size: 2.0em; }
+  section { font-size: 1.7em; }
   section {padding-bottom:100px;}
   section {padding-top: 20px;}
   
@@ -131,6 +131,8 @@ https://github.com/kikpond15/is-lab-b
 - processingで保存したデータを扱う方法について
 - 地図上にデータをマップする方法について
 (実際に実験した様子や、制作したプログラムなどもあれば)
+
+**p5の実行画面もスクリーンキャプチャを撮ってレポートの中に入れること**
 
 <br>
 小レポートの提出はしなくて良いが、最終レポートに備え作成することを推奨する。
