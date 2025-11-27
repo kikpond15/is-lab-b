@@ -3,7 +3,7 @@ Table table;
 void setup() {
   size(800,800);
     // data.csvを読み込み（ヘッダー行ありの場合はheaderを指定）
-    table = loadTable("m5.csv", "header");  
+    table = loadTable("myData.csv", "header");  
     printlnTable(); //データ確認用
 }
 

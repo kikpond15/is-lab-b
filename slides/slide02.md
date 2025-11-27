@@ -693,6 +693,19 @@ void printlnTable() {}　//前回と同様なので省略
 # (Sonification)
 
 ---
+## P5でSound ライブラリーを追加する 
+
+Processingの「スケッチ」タブから「ライブラリーをインポート」→「Manage Library」を開く
+<img src="img/ss_img 2025-11-27 17.12.43.png" width=1100>
+
+---
+
+「sound」ライブラリーを**install**する。
+
+<img src="img/ss_img 2025-11-27 17.16.23.png" width=700>
+
+
+---
 計測した心拍データ(csv)を使って、心拍データを音に変換してみよう。
 
 ```java
