@@ -106,7 +106,7 @@ https://github.com/kikpond15/is-lab-b
     - レポートには使っちゃダメ
     - 生成AIはコードが脱線するから1から作り直しになることもある
     - 生成AIより教員とSA/TAを頼って
-
+    - [生成AIとの付き合い方 / Generative AI and us](https://speakerdeck.com/kaityo256/generative-ai-and-us)
 
 ---
 ## レポートについて
@@ -551,8 +551,9 @@ dotViz/
 csvデータを入れ替え、dotViz.pdeを開いて、
 プログラムを実行(Ctrl+r or cmd+r)してみよう。
 
+
 ---
-## P5で距離データを点描する
+## P5で距離データを点描する(dotViz.pde)
 
 ```java
 Table table;
