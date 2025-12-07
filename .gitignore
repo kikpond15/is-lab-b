@@ -21,3 +21,6 @@ Thumbs.db
 #processing-vsc
 out/
 
+#list 
+*.xlsx
+
