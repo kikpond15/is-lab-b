@@ -25,7 +25,7 @@ void loop() {
   float temperature = dht.getTemperature();
 
   // 測定結果を画面に表示
-  M5.Lcd.clearDisplay();
+  
   M5.Lcd.setCursor(0, 60);
   M5.Lcd.setTextSize(3);
   M5.Lcd.printf("Temp: %.1f C", temperature);
@@ -34,5 +34,6 @@ void loop() {
   M5.Lcd.printf("Hum : %.1f %%", humidity);
 
   // 1分（60000ミリ秒）待機
-  delay(3000);
+  // delay(3000);
+  M5.Lcd.clearDisplay();
 }
