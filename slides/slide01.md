@@ -297,7 +297,7 @@ Name: **m5-test**
 Board: **M5Stack Core ESP32**
 Framework: **Arduino**
 Location☑️から保存先をデフォルトか任意のディレクトリに変更できる。
-デスクトップに「**meisei-exb2025**」フォルダを作成し、そこに保存しましょう。
+Cドライブ直下に「**meisei-exb2025**」フォルダを作成し、そこに保存しましょう。
 <img src="img/ss_img 2025-09-23 20.48.52.png" width=700>
 設定できたら「Finish」をクリック
 
