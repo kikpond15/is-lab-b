@@ -1,6 +1,10 @@
 import de.fhpotsdam.unfolding.*;
 import de.fhpotsdam.unfolding.geo.*;
 import de.fhpotsdam.unfolding.utils.*;
+import de.fhpotsdam.unfolding.providers.Microsoft;
+import de.fhpotsdam.unfolding.providers.Google;
+import de.fhpotsdam.unfolding.providers.OpenStreetMap;
+import de.fhpotsdam.unfolding.providers.MapBox;
 
 UnfoldingMap map;
 Location[] locations = {
@@ -14,8 +18,16 @@ Location[] locations = {
 
 void setup() {
   size(800, 600, P2D);
-
-  map = new UnfoldingMap(this);
+  
+  // ここで地図の種類を切り替えられる
+  //map = new UnfoldingMap(this, new Microsoft.RoadProvider());
+  //map = new UnfoldingMap(this, new Microsoft.HybridProvider());
+  //map = new UnfoldingMap(this, new Microsoft.AerialProvider());
+  map = new UnfoldingMap(this, new Google.GoogleMapProvider());
+  //map = new UnfoldingMap(this, new Google.GoogleSimplified2Provider());
+  //map = new UnfoldingMap(this, new Google.GoogleSimplifiedProvider());
+  //map = new UnfoldingMap(this, new Google.GoogleTerrainProvider());
+  
   map.zoomAndPanTo(17, new Location(35.64435017198614, 139.40846229633914));
 }
 
