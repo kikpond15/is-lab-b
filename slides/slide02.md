@@ -29,7 +29,6 @@ style: |
 
 ---
 <!-- _class: lead -->
-2025年後期
 
 # 情報学実験B
 ## 実世界センシング＆ビジュアライゼーション
@@ -768,10 +767,10 @@ osc.freq(freq) で音の高さを設定。
 # 地図上にデータをマップする
 
 ---
-**99_map_sample**の中の**MeiseiMapSample**を使って、地図上にデータをマップしてみよう。
+**98_map_sample**の中の**MeiseiMapSample**を使って、地図上にデータをマップしてみよう。
 <br>
 
-[README](https://github.com/kikpond15/is-lab-b/blob/main/projects/99_map_sample/README.md)から使用方法を確認しよう。
+[README](https://github.com/kikpond15/is-lab-b/blob/main/projects/98_map_sample/README.md)から使用方法を確認しよう。
 Unfoldingライブラリを追加する。processingでライブラリを追加する方法がわからない場合は聞いてください。
 
 ---
@@ -815,7 +814,7 @@ void draw() {
 
 実行すると下図の様に、緯度経度情報から地図上にellipseを配置できる。
 <br>
-<img src="../projects/99_map_sample/map.png" width=700>
+<img src="../projects/98_map_sample/map.png" width=700>
 
 ---
 <!-- _class: lead -->

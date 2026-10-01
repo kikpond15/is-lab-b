@@ -6,7 +6,6 @@ paginate: true
 style: |
   /* 全体を縮小*/
   /* エクスポートするときfont-sizeは、1.7emが良い */
-
   section { font-size: 1.7em; }
   section {padding-bottom:100px;}
   section {padding-top: 20px;}
@@ -29,7 +28,6 @@ style: |
 
 ---
 <!-- _class: lead -->
-2025年後期
 
 # 情報学実験B
 ## 実世界センシング＆ビジュアライゼーション

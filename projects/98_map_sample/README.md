@@ -18,10 +18,16 @@ http://unfoldingmaps.org/
 
 ## 実行手順
 
+<del>
 1. 以下のURLからProcessing4で実行可能なUnfoldingをダウンロードする
     - http://services.informatik.hs-mannheim.de/~nagel/GDV/Unfolding_for_processing_0.9.92.zip
-2. ダウンロードしたZipを解凍して、 `Processing/libraries` に配置する
-3. Processingで `MeiseiMapSample` を実行する
+</del>
+
+1. 98_map_sampleにUnfoldingライブラリのフォルダが置いてあります。これを`Processing/libraries` に配置します
+2. Processingで `MeiseiMapSample` を実行する
+
+
+
 
 ## 緯度経度情報をLocation配列を定義する文字列に変換するツール
 
