@@ -1,10 +1,18 @@
 Table table;
+int minTime = Integer.MAX_VALUE;
+int maxTime = Integer.MIN_VALUE;
 
 void setup() {
   size(800,800);
     // data.csvを読み込み（ヘッダー行ありの場合はheaderを指定）
-    table = loadTable("myData.csv", "header");  
+    table = loadTable("myData.csv", "header");
     printlnTable(); //データ確認用
+
+  for (TableRow row : table.rows()) {
+    int t = row.getInt("time");
+    if (t < minTime) minTime = t;
+    if (t > maxTime) maxTime = t;
+  }
 }
 
 void draw(){
@@ -13,7 +21,7 @@ void draw(){
     TableRow row = table.getRow(i);
     int time = row.getInt("time"); // 列名指定
     int distance = row.getInt("distance");  // 列名指定
-    float x = map(time, 27827, 46655, 0, width); // timeをx座標にマッピング
+    float x = map(time, minTime, maxTime, 0, width); // timeをx座標にマッピング
     float y = map(distance, 0, 400, height, 0); // distanceをy座標にマッピング（距離が大きいほど上に）
     fill(255);
     noStroke();
@@ -29,5 +37,5 @@ void printlnTable() {
         int time = row.getInt("time"); // 列名指定
         int distance = row.getInt("distance");  // 列名指定
         println(time + " : " + distance);
-    } 
+    }
 }
