@@ -63,7 +63,7 @@ void loop(void) {
   M5.Lcd.setCursor(10, 140);
   M5.Lcd.printf("B: %d", B);
 
-  //uint16_t COLOR= M5.Lcd.color565(R,G,B);
-  //M5.Lcd.fillRect(0, 50, 320, 200, COLOR);
+  uint16_t COLOR= M5.Lcd.color565(R,G,B);
+  M5.Lcd.fillRect(0, 50, 320, 200, COLOR);
   delay(500);
 }
