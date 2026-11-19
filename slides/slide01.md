@@ -294,7 +294,7 @@ VS Codeを開いて、左メニューの①Extensions(拡張機能)から、②P
 
 ---
 Name: **m5-test**
-Board: **M5Stack Core ESP32**
+Board: **M5Stack Core2**
 Framework: **Arduino**
 Location☑️から保存先をデフォルトか任意のディレクトリに変更できる。
 Cドライブ直下に「**meisei-exb2026**」フォルダを作成し、そこに保存しましょう。
