@@ -24,11 +24,11 @@ void setup(void) {
   t.time.seconds = 0;
   M5.Rtc.setDateTime(t);
 
-  //割り込みタイマー初期化
-  timer = timerBegin(0,80,true);
-  timerAttachInterrupt(timer, &onTimerISR,true);
-  timerAlarmWrite(timer, (uint64_t)interval_seconds * 1000000ULL,true);
-  timerAlarmEnable(timer);
+  //割り込みタイマー初期化（Arduino-ESP32 3.x のAPI）
+  timer = timerBegin(1000000);                 // タイマーを1MHz（1カウント=1マイクロ秒）で作成
+  timerAttachInterrupt(timer, &onTimerISR);    // 割り込み時に呼ぶ関数を登録
+  timerAlarm(timer, (uint64_t)interval_seconds * 1000000ULL, true, 0); // interval秒ごと・繰り返し・回数無制限
+  timerStop(timer);                            // Aボタンが押されるまで止めておく
 
   //SDカード初期化
   SD.begin(4, SPI, 40000000); // SDカード初期化(CSピン4, SPIクロック40MHz)
@@ -51,7 +51,8 @@ void loop(void) {
   if (M5.BtnA.wasPressed() && !running) {
     running = true;
     tick_flag = false;
-    timerAlarmEnable(timer);
+    timerRestart(timer);  // カウントを0に戻して
+    timerStart(timer);    // タイマー開始
   }
 
   //割り込みタイマーでフラグが立ったら色を変えて保存

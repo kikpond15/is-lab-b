@@ -55,15 +55,17 @@ void loop(void) {
   }
 
   // 表示更新
-  M5.Lcd.fillRect(0, 50, 320, 200, BLACK);
-  M5.Lcd.setCursor(10, 60);
+  M5.Lcd.setTextSize(2);
+  M5.Lcd.fillRect(0, 40, 320, 55, BLACK);
+  M5.Lcd.setCursor(10, 42);
   M5.Lcd.printf("R: %d", R);
-  M5.Lcd.setCursor(10, 100);
+  M5.Lcd.setCursor(10, 60);
   M5.Lcd.printf("G: %d", G);
-  M5.Lcd.setCursor(10, 140);
+  M5.Lcd.setCursor(10, 78);
   M5.Lcd.printf("B: %d", B);
 
-  uint16_t COLOR= M5.Lcd.color565(R,G,B);
-  M5.Lcd.fillRect(0, 50, 320, 200, COLOR);
+  // uint16_t COLOR = M5.Lcd.color565(R, G, B);
+  // M5.Lcd.fillRect(0, 95, 320, 145, COLOR);
+  
   delay(500);
 }
